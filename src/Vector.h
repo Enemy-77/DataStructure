@@ -4,6 +4,7 @@
 #define DllExport __declspec(dllexport)
 
 #include <algorithm>
+#include "dsexceptions.h"
 
 template <typename Object>
 class Vector {
@@ -29,7 +30,6 @@ public:
 		delete[] objects;
 	}
 
-	//TODO: 数组可以这么弄吗(大括号初始化)？
 	Vector(Vector&& rhs) : theSize{ rhs.theSize }, theCapacity{ rhs.theCapacity }, objects{rhs.objects} {
 		rhs.theCapacity = 0;
 		rhs.theSize = 0;
@@ -54,23 +54,24 @@ public:
 		if (newCapacity > theCapacity) {
 			Object* tmp = new Object[newCapacity];
 			for (int i = 0; i < theSize; ++i) {
-				tmp[i] = tmp[i];
+				tmp[i] = objects[i];
 			}
-			delete[] objects;
-			objects = tmp;
+			theCapacity = newCapacity;
+			std::swap(objects, tmp);
+			delete[] tmp;
 		}
 	}
 
 	Object& operator[](int index) {
 		if (index > theSize) {
-			...
+			throw ArrayIndexOutOfBoundsException{};
 		}
 		return objects[index];
 	}
 
 	const Object& operator[](int index) const {
 		if (index > theSize) {
-			...
+			throw ArrayIndexOutOfBoundsException{};
 		}
 		return objects[index];
 	}
