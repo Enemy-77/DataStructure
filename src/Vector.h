@@ -128,7 +128,6 @@ public:
 		return &objects[theSize];
 	}
 
-
 	static const int SPARE_CAPACITY = 16;
 
 private:
