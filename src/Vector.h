@@ -1,13 +1,14 @@
 #pragma once
 #ifndef VECOTR_H
 #define VECOTR_H
+#define DllExport __declspec(dllexport)
 
 #include <algorithm>
 
 template <typename Object>
 class Vector {
 public:
-	explicit Vector(int initSize = 0) : size_{initSize}, capacity_{initSize + SPARE_CAPACITY} {
+	explicit Vector(int initSize = 0) : theSize{initSize}, theCapacity{initSize + SPARE_CAPACITY} {
 		objects = new Object[theCapacity];
 	}
 
@@ -51,9 +52,9 @@ public:
 
 	void reserve(int newCapacity) {
 		if (newCapacity > theCapacity) {
-			Object* tmp = new[newCapacity];
+			Object* tmp = new Object[newCapacity];
 			for (int i = 0; i < theSize; ++i) {
-				tmp[i] = Object[i];
+				tmp[i] = tmp[i];
 			}
 			delete[] objects;
 			objects = tmp;
