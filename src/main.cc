@@ -134,10 +134,3 @@ void fun3(int A[], const int n) {
         std::swap(A[i], A[RandInt(0, i)]);
     }
 }
-
-int main() {
-
-    
-    return 0;
-}
-	 
