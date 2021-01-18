@@ -13,7 +13,7 @@ set(GTEST_SRC
 
 
 add_library(GTest ${GTEST_SRC})
-set_target_properties (GTest PROPERTIES FOLDER Test)
+set_target_properties(GTest PROPERTIES FOLDER Test)
 
 function(CopyLib target)
   foreach(lib ${ARGN})
@@ -28,6 +28,6 @@ endfunction()
 SET(TEST_PATH ${PROJECT_SOURCE_DIR}/test)
 file(GLOB TEST_SRC ${TEST_PATH}/*.cc)
 add_executable(TestDataStructure ${TEST_SRC})
-target_link_libraries(TestDataStructure DataStructure)
+target_link_libraries(TestDataStructure DataStructure GTest)
 set_target_properties(TestDataStructure PROPERTIES LINKER_LANGUAGE CXX FOLDER Test)
 CopyLib(TestDataStructure DataStructure)
