@@ -236,6 +236,18 @@ public:
 		return to;
 	}
 
+	void swapWithNext(Node* beforeP) {
+		Node* P = beforeP->next;
+		Node* afterP = P->next;
+		P->next = afterP->next;
+		P->next->prev = P;
+		beforeP->next = afterP;
+		afterP->prev = beforeP;
+		afterP->next = P;
+		P->prev = afterP;
+	}
+
+
 private:
 	void Init() {
 		theSize = 0;

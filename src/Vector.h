@@ -130,6 +130,17 @@ public:
 		return &objects[theSize];
 	}
 
+	iterator insert(iterator pos, Object x) {
+		theSize++;
+		reserve(theSize);
+		int index = (pos - objects) / size(Object);
+		objects[index] = x;
+		
+		
+	}
+
+
+
 	static const int SPARE_CAPACITY = 16;
 
 private:
