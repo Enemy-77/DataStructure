@@ -166,9 +166,7 @@ private:
 	}
 	BinaryNode* clone(BinaryNode* t) const {
 		if (t != nullptr) {
-			BinaryNode* node = new BinaryNode(t->element, t->left, t->right);
-			node->left = clone(t->left);
-			node->right = clone(t->right);
+			BinaryNode* node = new BinaryNode(t->element, clone(t->left), clone(t->right));
 			return node;
 		}
 		return nullptr;
