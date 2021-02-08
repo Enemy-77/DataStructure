@@ -6,13 +6,6 @@
 
 template <typename KeyType, typename ValueType>
 class Map {
-public:
-	Map();
-
-
-
-private:
-	set<>
 
 
 };

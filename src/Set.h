@@ -7,6 +7,7 @@ template <typename Comparable>
 class Set {
 public:
 
+
 class const_iterator {
 public:
 	const_iterator() : current{ nullptr } {}
