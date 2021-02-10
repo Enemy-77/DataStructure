@@ -69,7 +69,20 @@ private:
 	Vector<List<HashedObj>> theLists;
 	int currentSize;
 
-	void rehash();
+	void rehash()
+	{
+		Vector<List<HashedObj>> oldLists = theLists;
+		theLists.resize(nextPrime(2 * theLists.size()));
+		for (auto& thisList : theLists)
+			thisList.clear();
+		
+		currentSize = 0;
+		for (auto & thisList : oldLists) {
+			for (auto & x : thisList) {
+				insert(std::move(x));
+			}
+		}
+	}
 	size_t myhash(const HashedObj& x) const;
 };
 
