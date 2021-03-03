@@ -4,6 +4,8 @@
 #include "Vector.h"
 #include "UniformRandom.h"
 
+#define MAX_LOAD 0.4
+
 bool isPrime(int n)
 {
 	if (n == 2 || n == 3)
@@ -59,7 +61,7 @@ public:
 			mult = r.nextInt();
 	}
 
-	size_t hash(const string& x, int which) const
+	size_t hash(const std::string& x, int which) const
 	{
 		const int multiplier = MULTIPLIERS[which];
 		size_t hashVal = 0;
@@ -119,6 +121,7 @@ public:
 		--currentSize;
 		return true;
 	}
+	
 	bool insert(const AnyType& x)
 	{
 		if (contains(x))
@@ -127,18 +130,19 @@ public:
 		if (currentSize >= array.size() * MAX_LOAD)
 			expand();
 
-		return insertHelper(x);
+		return insertHelper1(x);
 	}
-	bool insert(AnyType&& x)
-	{
-		if (contains(x))
-			return false;
 
-		if (currentSize >= array.size() * MAX_LOAD)
-			expand();
-
-		return insertHelper(std::move(x));
-	}
+    bool insert( AnyType && x )
+    {
+        if( contains( x ) ) 
+            return false;
+        
+        if( currentSize >= array.size( ) * MAX_LOAD )
+            expand( );
+        
+        return insertHelper1( std::move( x ) );
+    }
 
 
 private:
@@ -153,7 +157,7 @@ private:
 			: element { std::move(e) }, isActive { a } {}
 	};
 
-	bool insertHelper(const AnyType& xx)
+	bool insertHelper1(const AnyType& xx)
 	{
 		const int COUNT_LIMIT = 100;
 		AnyType x = xx;
@@ -195,7 +199,7 @@ private:
 		}
 	}
 
-	bool insertHelper(AnyType&& x)
+	bool insertHelper1(AnyType&& x)
 	{
 		const int COUNT_LIMIT = 100;
 		while (true)
@@ -265,7 +269,7 @@ private:
 
 	void rehash()
 	{
-		hashFunctions.generateNewFunction();
+		hashFunctions.getNumberOfFunctions();
 		rehash(array.size());
 	}
 
@@ -283,7 +287,6 @@ private:
 				insert(std::move(entry.element));
 	}
 
-	static const double MAX_LOAD = 0.40;
 	static const int ALLOWED_REHASHES = 5;
 
 	Vector<HashEntry> array;
