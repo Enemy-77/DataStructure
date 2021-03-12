@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "AvlTree.h"
 
+/*
 TEST(TestTree, AvlTreeTest) {
 	AvlTree<int> t;
 	int NUMS = 2000000;
@@ -46,3 +47,4 @@ TEST(TestTree, AvlTreeTest) {
 	std::cout << "End of test..." << std::endl;
 
 }
+*/
