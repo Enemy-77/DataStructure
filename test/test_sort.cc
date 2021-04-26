@@ -10,3 +10,9 @@ TEST(TestSort, TestShell) {
 	std::vector<int> vec = { 81, 94, 11, 96, 12, 35, 17, 95, 28, 58,41,75,15 };
 	shellsort(vec);
 }
+
+
+TEST(TestSort, TestMergeSort) {
+    std::vector<int> vec = { 81, 94, 11, 96, 12, 35, 17, 95, 28, 58,41,75,15 };
+	mergeSort(vec);
+}

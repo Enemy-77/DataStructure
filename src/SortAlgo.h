@@ -61,4 +61,57 @@ void shellsort(std::vector<Comparable>& a) {
 	}
 }
 
+
+template <typename Comparable>
+void mergeSort(std::vector<Comparable>& a)
+{
+	std::vector<Comparable> tmpArray(a.size());
+
+    mergeSort(a, tmpArray, 0, a.size() - 1);
+}
+
+template <typename Comparable>
+void mergeSort(std::vector<Comparable>& a, std::vector<Comparable>& tmpArray, int left, int right)
+{
+    if (left < right) {
+        int mid = (left + right) / 2;
+        mergeSort(a, tmpArray, left, mid);
+        mergeSort(a, tmpArray, mid + 1, right);
+        merge(a, tmpArray, left, mid + 1, right);
+    }
+}
+
+template <typename Comparable>
+void merge(std::vector<Comparable>& a, std::vector<Comparable>& tmpArray, int leftPos, int rightPos, int rightEnd)
+{
+    int leftEnd = rightPos - 1;
+    int tempPos = leftPos;
+	int numElem = rightEnd - leftPos + 1;
+    while (leftPos <= leftEnd && rightPos <= rightEnd)
+    {
+        tmpArray[tempPos++] = a[leftPos] < a[rightPos] ? a[leftPos++] : a[rightPos++];
+    }
+    if (leftPos <= leftEnd)
+    {
+        for (int i = leftPos; i <= leftEnd; ++i)
+        {
+            tmpArray[tempPos++] = a[i];
+        }
+    }
+    if (rightPos <= rightEnd)
+    {
+        for (int i = rightPos; i <= rightEnd; ++i)
+        {
+            tmpArray[tempPos++] = a[i];
+        }
+    }
+
+	for (int i = 0; i < numElem; ++i, --rightEnd)
+	{
+		a[rightEnd] = tmpArray[rightEnd];
+	}
+
+}
+
+
 #endif
